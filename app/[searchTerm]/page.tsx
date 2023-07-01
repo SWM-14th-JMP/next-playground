@@ -25,21 +25,21 @@ export async function generateMetadata({ params: { searchTerm } }: Props) {
 }
 
 export default async function SearchResults({ params: { searchTerm } }: Props) {
-  // const wikiData: Promise<SearchResult> = getWikiResults(searchTerm);
-  // const data = await wikiData;
-  // const results: Result[] | undefined = data?.query?.pages;
+  const wikiData: Promise<SearchResult> = getWikiResults(searchTerm);
+  const data = await wikiData;
+  const results: Result[] | undefined = data?.query?.pages;
 
-  // const content = (
-  //   <main className="bg-slate-200 mx-auto max-w-lg py-1 min-h-screen">
-  //     {results ? (
-  //       Object.values(results).map((result) => {
-  //         return <Item key={result.pageid} result={result} />;
-  //       })
-  //     ) : (
-  //       <h2 className="p-2 text-xl">{`${searchTerm} does not exists.`}</h2>
-  //     )}
-  //   </main>
-  // );
+  const content = (
+    <main className="bg-slate-200 mx-auto max-w-lg py-1 min-h-screen">
+      {results ? (
+        Object.values(results).map((result) => {
+          return <Item key={result.pageid} result={result} />;
+        })
+      ) : (
+        <h2 className="p-2 text-xl">{`${searchTerm} does not exists.`}</h2>
+      )}
+    </main>
+  );
 
   return <div>{searchTerm}</div>;
 }
