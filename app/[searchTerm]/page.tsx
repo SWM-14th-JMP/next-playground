@@ -1,6 +1,7 @@
 import React from "react";
 import getWikiResults from "@/lib/getWikiResults";
 import Item from "./components/Item";
+import { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
   params: {
@@ -8,21 +9,24 @@ type Props = {
   };
 };
 
-export async function generateMetadata({ params: { searchTerm } }: Props) {
-  const wikiData: Promise<SearchResult> = getWikiResults(searchTerm);
-  const data = await wikiData;
-  const displayTerm = searchTerm.replaceAll("%20", " ");
+// export async function generateMetadata(
+//   { params: { searchTerm } }: Props,
+//   parent?: ResolvingMetadata
+// ): Promise<Metadata> {
+//   const wikiData: Promise<SearchResult> = getWikiResults(searchTerm);
+//   const data = await wikiData;
+//   const displayTerm = searchTerm.replaceAll("%20", " ");
 
-  if (!data?.query?.pages) {
-    return {
-      title: `${displayTerm} Not Found`,
-    };
-  }
-  return {
-    title: displayTerm,
-    describtion: `Search Results for ${displayTerm}`,
-  };
-}
+//   if (!data?.query?.pages) {
+//     return {
+//       title: `${displayTerm} Not Found`,
+//     };
+//   }
+//   return {
+//     title: displayTerm,
+//     description: `Search Results for ${displayTerm}`,
+//   };
+// }
 
 export default async function SearchResults({ params: { searchTerm } }: Props) {
   const wikiData: Promise<SearchResult> = getWikiResults(searchTerm);
